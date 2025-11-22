@@ -64,6 +64,14 @@ function App() {
   const [thoughtType, setThoughtType] = useState(""); // "rational" | "irrational"
   const [distortion, setDistortion] = useState("");
 
+  const [evidenceFor, setEvidenceFor] = useState("");
+  const [evidenceAgainst, setEvidenceAgainst] = useState("");
+  const [alternativeExplanation, setAlternativeExplanation] = useState("");
+  const [worstBestRealistic, setWorstBestRealistic] = useState("");
+  const [effectBelief, setEffectBelief] = useState("");
+  const [friendPerspective, setFriendPerspective] = useState("");
+  const [actionPlan, setActionPlan] = useState("");
+
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
@@ -87,6 +95,14 @@ function App() {
       thought: thought.trim(),
       thoughtType: thoughtType || "necunoscut",
       distortion: distortion || "Neîncadrat",
+
+      evidenceFor: evidenceFor.trim(),
+      evidenceAgainst: evidenceAgainst.trim(),
+      alternativeExplanation: alternativeExplanation.trim(),
+      worstBestRealistic: worstBestRealistic.trim(),
+      effectBelief: effectBelief.trim(),
+      friendPerspective: friendPerspective.trim(),
+      actionPlan: actionPlan.trim(),
     };
 
     setEntries((prev) => [newEntry, ...prev]);
@@ -97,6 +113,14 @@ function App() {
     setThought("");
     setThoughtType("");
     setDistortion("");
+
+    setEvidenceFor("");
+    setEvidenceAgainst("");
+    setAlternativeExplanation("");
+    setWorstBestRealistic("");
+    setEffectBelief("");
+    setFriendPerspective("");
+    setActionPlan("");
   };
 
   const handleClearAll = () => {
@@ -141,6 +165,20 @@ function App() {
             setThoughtType={setThoughtType}
             distortion={distortion}
             setDistortion={setDistortion}
+            evidenceFor={evidenceFor}
+            setEvidenceFor={setEvidenceFor}
+            evidenceAgainst={evidenceAgainst}
+            setEvidenceAgainst={setEvidenceAgainst}
+            alternativeExplanation={alternativeExplanation}
+            setAlternativeExplanation={setAlternativeExplanation}
+            worstBestRealistic={worstBestRealistic}
+            setWorstBestRealistic={setWorstBestRealistic}
+            effectBelief={effectBelief}
+            setEffectBelief={setEffectBelief}
+            friendPerspective={friendPerspective}
+            setFriendPerspective={setFriendPerspective}
+            actionPlan={actionPlan}
+            setActionPlan={setActionPlan}
             onSubmit={handleSubmit}
           />
 
@@ -204,6 +242,20 @@ function JournalForm({
   setThoughtType,
   distortion,
   setDistortion,
+  evidenceFor,
+  setEvidenceFor,
+  evidenceAgainst,
+  setEvidenceAgainst,
+  alternativeExplanation,
+  setAlternativeExplanation,
+  worstBestRealistic,
+  setWorstBestRealistic,
+  effectBelief,
+  setEffectBelief,
+  friendPerspective,
+  setFriendPerspective,
+  actionPlan,
+  setActionPlan,
   onSubmit,
 }) {
   return (
@@ -359,6 +411,114 @@ function JournalForm({
             *Emoția și gândul automat sunt obligatorii. Restul te ajută să vezi
             tipare (intensitate, tip de gând, distorsiuni).
           </p>
+
+          {/* Întrebări de restructurare a gândului */}
+          <div className="mt-4 space-y-3 rounded-2xl border border-slate-800 bg-slate-950/90 p-3">
+            <h3 className="text-xs font-semibold text-cyan-300">
+              Întrebări pentru restructurarea gândului automat
+            </h3>
+            <p className="text-[11px] text-slate-400 mb-1">
+              Răspunsurile de mai jos sunt opționale, dar te ajută să lucrezi
+              cognitiv cu gândul automat, nu doar să îl notezi.
+            </p>
+
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-200">
+                1. Care sunt dovezile că acest gând automat este adevărat?
+              </label>
+              <textarea
+                value={evidenceFor}
+                onChange={(e) => setEvidenceFor(e.target.value)}
+                rows={2}
+                className="w-full resize-none rounded-2xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-[11px] text-slate-100 outline-none ring-cyan-400/40 focus:border-cyan-400 focus:ring"
+                placeholder="Notează fapte concrete – nu doar impresii sau emoții."
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-200">
+                2. Care sunt dovezile că acest gând automat NU este adevărat?
+              </label>
+              <textarea
+                value={evidenceAgainst}
+                onChange={(e) => setEvidenceAgainst(e.target.value)}
+                rows={2}
+                className="w-full resize-none rounded-2xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-[11px] text-slate-100 outline-none ring-cyan-400/40 focus:border-cyan-400 focus:ring"
+                placeholder="Ce fapte, experiențe sau feedback contrazic gândul?"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-200">
+                3. Există o explicație alternativă a situației?
+              </label>
+              <textarea
+                value={alternativeExplanation}
+                onChange={(e) => setAlternativeExplanation(e.target.value)}
+                rows={2}
+                className="w-full resize-none rounded-2xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-[11px] text-slate-100 outline-none ring-cyan-400/40 focus:border-cyan-400 focus:ring"
+                placeholder="Cum ai mai putea interpreta ce s-a întâmplat, într-un mod realist?"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-200">
+                4. Care este cel mai rău lucru care s-ar putea întâmpla și cum
+                ai putea face față? Care este cel mai bun lucru care s-ar putea
+                întâmpla? Care este rezultatul cel mai realist?
+              </label>
+              <textarea
+                value={worstBestRealistic}
+                onChange={(e) => setWorstBestRealistic(e.target.value)}
+                rows={3}
+                className="w-full resize-none rounded-2xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-[11px] text-slate-100 outline-none ring-cyan-400/40 focus:border-cyan-400 focus:ring"
+                placeholder="Scrie pe rând: cel mai rău scenariu + cum ai face față, cel mai bun scenariu, scenariul realist."
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-200">
+                5. Care este efectul faptului că crezi acest gând automat? Ce
+                efect ar putea avea schimbarea modului tău de a gândi?
+              </label>
+              <textarea
+                value={effectBelief}
+                onChange={(e) => setEffectBelief(e.target.value)}
+                rows={2}
+                className="w-full resize-none rounded-2xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-[11px] text-slate-100 outline-none ring-cyan-400/40 focus:border-cyan-400 focus:ring"
+                placeholder="Cum îți influențează emoțiile și comportamentele? Ce s-ar schimba dacă ai gândi altfel?"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-200">
+                6. Dacă un prieten apropiat ar fi în această situație și ar avea
+                același gând, ce i-ai spune?
+              </label>
+              <textarea
+                value={friendPerspective}
+                onChange={(e) => setFriendPerspective(e.target.value)}
+                rows={2}
+                className="w-full resize-none rounded-2xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-[11px] text-slate-100 outline-none ring-cyan-400/40 focus:border-cyan-400 focus:ring"
+                placeholder="Ce i-ai spune unui prieten ca să îl ajuți – nu ca să îl judeci?"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-semibold text-slate-200">
+                7. Ce ar trebui să faci în legătură cu asta? Ce pași concreți ai
+                putea face?
+              </label>
+              <textarea
+                value={actionPlan}
+                onChange={(e) => setActionPlan(e.target.value)}
+                rows={2}
+                className="w-full resize-none rounded-2xl border border-slate-700 bg-slate-950/70 px-3 py-2 text-[11px] text-slate-100 outline-none ring-cyan-400/40 focus:border-cyan-400 focus:ring"
+                placeholder="De exemplu: să amân decizia, să cer clarificări, să îmi programez o discuție, să exersez un nou comportament etc."
+              />
+            </div>
+          </div>
+
           <button
             type="submit"
             disabled={!emotion || !thought}
@@ -559,6 +719,47 @@ function JournalList({ entries }) {
               <EntryField label="Distorsiune cognitivă">
                 {entry.distortion}
               </EntryField>
+              {entry.evidenceFor && (
+                <EntryField label="Dovezi că gândul este adevărat">
+                  {entry.evidenceFor}
+                </EntryField>
+              )}
+
+              {entry.evidenceAgainst && (
+                <EntryField label="Dovezi că gândul NU este adevărat">
+                  {entry.evidenceAgainst}
+                </EntryField>
+              )}
+
+              {entry.alternativeExplanation && (
+                <EntryField label="Explicație alternativă">
+                  {entry.alternativeExplanation}
+                </EntryField>
+              )}
+
+              {entry.worstBestRealistic && (
+                <EntryField label="Cel mai rău / cel mai bun / cel mai realist rezultat">
+                  {entry.worstBestRealistic}
+                </EntryField>
+              )}
+
+              {entry.effectBelief && (
+                <EntryField label="Efectul credinței în gând vs. schimbarea gândului">
+                  {entry.effectBelief}
+                </EntryField>
+              )}
+
+              {entry.friendPerspective && (
+                <EntryField label="Ce i-ai spune unui prieten în aceeași situație">
+                  {entry.friendPerspective}
+                </EntryField>
+              )}
+
+              {entry.actionPlan && (
+                <EntryField label="Plan de acțiune">
+                  {entry.actionPlan}
+                </EntryField>
+              )}
             </motion.article>
           ))}
         </div>
